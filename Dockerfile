@@ -67,7 +67,7 @@ RUN    git clone https://github.com/rbenv/rbenv.git /opt/.rbenv \
 
 RUN    mv /bin/sh /bin/sh_tmp && ln -s /bin/bash /bin/sh
 RUN    source /etc/profile.d/rbenv.sh; \
-       LANG=C rbenv install 2.7.0 && rbenv global 2.7.0 && rbenv rehash && gem install bundler
+       LANG=C rbenv install 2.7.0 && rbenv global 2.7.0 && rbenv rehash && gem install bundler -v "2.1.2"
 RUN    rm /bin/sh && mv /bin/sh_tmp /bin/sh
 
 
