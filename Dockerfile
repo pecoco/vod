@@ -12,7 +12,7 @@ RUN mkdir -p $RECORD_DIR \
 ADD node-v12.16.1-linux-x64.tar.xz /
 ADD live $RAILS_ROOT
 
-RUN chmod -R 777 RECORD_DIR
+RUN chmod -R 777 $RECORD_DIR
 
 RUN sed "s/archive\.ubuntu\.com/jp\.archive\.ubuntu\.com/" -i /etc/apt/sources.list \
     && sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list \
