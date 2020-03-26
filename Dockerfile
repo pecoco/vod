@@ -119,9 +119,14 @@ ENV RBENV_ROOT "/opt/.rbenv"
 ENV PATH "/opt/.rbenv/bin:/opt/.rbenv/shims:$PATH"
 
 WORKDIR $RAILS_ROOT
+
+ENV EDITOR cat
 RUN bundle install && \
     yarn install && \
+    ./bin/rails credentials:edit && \
     ./bin/rake assets:precompile RAILS_ENV=production
+
+ENV EDITOR vim
 
 EXPOSE 1935 80 443
 
