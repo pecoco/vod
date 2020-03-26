@@ -1,0 +1,5 @@
+<% @streams.each do |stream| %>
+  <%= link_to "/play/#{stream}" do %>
+    <%= image_tag "/video/#{stream}.png", :size => '320x240' %>
+  <% end %>
+<% end %>

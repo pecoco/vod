@@ -1,0 +1,24 @@
+<script>
+  $(function(){
+    var video = document.getElementById('video');
+    var stream = video.getAttribute('stream');
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource('http://172.30.0.36/video/' + stream + '_src/index.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        video.play();
+      });
+    }
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = 'http://172.30.0.36/video/' + stream + '_src/index.m3u8'
+      video.addEventListener('loadedmetadata', function() {
+        video.play();
+      });
+    }
+  });
+</script>
+
+<div class="center-block">
+  <video id="video" autoplay preload="auto" onloadstart="this.volume=0.5" stream=<%= @stream =%> controls />
+</div>
