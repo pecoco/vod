@@ -6,13 +6,12 @@ ENV NGINX_RTMP_MODULE_VERSION 1.2.1
 ENV RECORD_DIR /record/
 ENV RAILS_ROOT /usr/src/app/
 
-RUN mkdir -p $RECORD_DIR \
-    && mkdir -p $RAILS_ROOT
+RUN mkdir -p $RECORD_DIR && \
+    chmod -R 777 $RECORD_DIR && \
+    mkdir -p $RAILS_ROOT
 
 ADD node-v12.16.1-linux-x64.tar.xz /
 ADD live $RAILS_ROOT
-
-RUN chmod -R 777 $RECORD_DIR
 
 RUN sed "s/archive\.ubuntu\.com/jp\.archive\.ubuntu\.com/" -i /etc/apt/sources.list \
     && sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list \
@@ -78,7 +77,7 @@ RUN mkdir -p /tmp/build/nginx && \
     tar -zxf ${NGINX_VERSION}.tar.gz
 
 # Download and decompress RTMP module
-RUN   mkdir -p /tmp/build/nginx-rtmp-module && \
+RUN mkdir -p /tmp/build/nginx-rtmp-module && \
     cd /tmp/build/nginx-rtmp-module  && \
     curl -L --output nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}.tar.gz https://github.com/arut/nginx-rtmp-module/archive/v${NGINX_RTMP_MODULE_VERSION}.tar.gz && \
     tar -zxf nginx-rtmp-module-${NGINX_RTMP_MODULE_VERSION}.tar.gz
