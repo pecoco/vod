@@ -122,6 +122,7 @@ WORKDIR $RAILS_ROOT
 ENV EDITOR cat
 RUN bundle install && \
     yarn install && \
+    rm -f config/credentials.yml.enc && \
     ./bin/rails credentials:edit && \
     ./bin/rake assets:precompile RAILS_ENV=production
 
